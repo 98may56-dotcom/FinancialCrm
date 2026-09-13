@@ -30,7 +30,24 @@ namespace FinancialCrm
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            YenileListe();
+            YenileListeVeTemizle();
+        }
+
+        private void YenileListeVeTemizle()
+        {
+            // DataGridView, satırlar eklenince (veya CurrentCell null'a çekilince) otomatik olarak
+            // ilk satırı seçili hale getirip SelectionChanged'i tekrar tetikleyebiliyor.
+            // Bu yüzden temizlik süresince olayı geçici olarak devre dışı bırakıyoruz.
+            dgvCariler.SelectionChanged -= dgvCariler_SelectionChanged;
+            try
+            {
+                YenileListe();
+                FormuTemizle();
+            }
+            finally
+            {
+                dgvCariler.SelectionChanged += dgvCariler_SelectionChanged;
+            }
         }
 
         private void YenileListe()
@@ -48,7 +65,6 @@ namespace FinancialCrm
                         cari.Adres,
                         cari.Bakiye.ToString("N2", CultureInfo.GetCultureInfo("tr-TR")));
                 }
-                lblDurum.Text = string.Empty;
             }
             catch (Exception ex)
             {
@@ -71,15 +87,21 @@ namespace FinancialCrm
 
         private void btnYeni_Click(object sender, EventArgs e)
         {
+            FormuTemizle();
+            lblDurum.Text = string.Empty;
+            txtCariAdi.Focus();
+        }
+
+        private void FormuTemizle()
+        {
             _seciliCariId = null;
             txtCariAdi.Clear();
             txtTelefon.Clear();
             txtEposta.Clear();
             txtAdres.Clear();
             txtBakiye.Clear();
-            lblDurum.Text = string.Empty;
             dgvCariler.ClearSelection();
-            txtCariAdi.Focus();
+            dgvCariler.CurrentCell = null;
         }
 
         private void btnKaydet_Click(object sender, EventArgs e)
@@ -123,8 +145,7 @@ namespace FinancialCrm
                     lblDurum.Text = "Cari güncellendi.";
                 }
 
-                YenileListe();
-                btnYeni_Click(sender, e);
+                YenileListeVeTemizle();
             }
             catch (Exception ex)
             {
@@ -153,8 +174,7 @@ namespace FinancialCrm
             {
                 CariRepository.Delete(_seciliCariId.Value);
                 lblDurum.Text = "Cari silindi.";
-                YenileListe();
-                btnYeni_Click(sender, e);
+                YenileListeVeTemizle();
             }
             catch (Exception ex)
             {
@@ -164,7 +184,7 @@ namespace FinancialCrm
 
         private void btnYenile_Click(object sender, EventArgs e)
         {
-            YenileListe();
+            YenileListeVeTemizle();
         }
     }
 }
