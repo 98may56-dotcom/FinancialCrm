@@ -7,3 +7,4 @@ c:\Users\MUSTAFA\source\repos\FinancialCrm\FinancialCrm\obj\Debug\FinancialCrm.c
 c:\Users\MUSTAFA\source\repos\FinancialCrm\FinancialCrm\obj\Debug\FinancialCrm.csproj.CoreCompileInputs.cache
 c:\Users\MUSTAFA\source\repos\FinancialCrm\FinancialCrm\obj\Debug\FinancialCrm.exe
 c:\Users\MUSTAFA\source\repos\FinancialCrm\FinancialCrm\obj\Debug\FinancialCrm.pdb
+c:\Users\MUSTAFA\source\repos\FinancialCrm\FinancialCrm\obj\Debug\FinancialCrm.exe.config

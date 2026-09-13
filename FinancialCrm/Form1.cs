@@ -23,6 +23,7 @@ namespace FinancialCrm
             dgvCariler.Columns.Add("CariAdi", "Cari Adı");
             dgvCariler.Columns.Add("Telefon", "Telefon");
             dgvCariler.Columns.Add("Eposta", "Eposta");
+            dgvCariler.Columns.Add("Adres", "Adres");
             dgvCariler.Columns.Add("Bakiye", "Bakiye");
             dgvCariler.Columns["Id"].Visible = false;
         }
@@ -44,6 +45,7 @@ namespace FinancialCrm
                         cari.CariAdi,
                         cari.Telefon,
                         cari.Eposta,
+                        cari.Adres,
                         cari.Bakiye.ToString("N2", CultureInfo.GetCultureInfo("tr-TR")));
                 }
                 lblDurum.Text = string.Empty;
@@ -63,6 +65,7 @@ namespace FinancialCrm
             txtCariAdi.Text = Convert.ToString(dgvCariler.CurrentRow.Cells["CariAdi"].Value);
             txtTelefon.Text = Convert.ToString(dgvCariler.CurrentRow.Cells["Telefon"].Value);
             txtEposta.Text = Convert.ToString(dgvCariler.CurrentRow.Cells["Eposta"].Value);
+            txtAdres.Text = Convert.ToString(dgvCariler.CurrentRow.Cells["Adres"].Value);
             txtBakiye.Text = Convert.ToString(dgvCariler.CurrentRow.Cells["Bakiye"].Value);
         }
 
